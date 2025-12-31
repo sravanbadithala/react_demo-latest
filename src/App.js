@@ -1,16 +1,56 @@
- import React from "react";
+ import React, { lazy,Suspense } from "react";
 import ReactDOM from "react-dom/client"
 import Header from "./Componets/Header"
 import Bodycomponent from "./Componets/Body"
+import { createBrowserRouter, RouterProvider,Outlet } from "react-router-dom";
 
-
+import ConatctUs from "./Componets/ContactUs";
+import ErrorRouter from "./Componets/RouterError";
+import RestroMenu from "./Componets/RestroMenu";
+ 
+const Grocery=lazy(()=>import("./Componets/Grocery"));
+ 
+const AboutUs=lazy(()=>import("./Componets/AboutUs"));
 
 const AppLevel=()=>{
   return(<div className="app">
 <Header/>
-<Bodycomponent/>
+<Outlet/>
   </div>);  
 }
+
+const appRouter=createBrowserRouter([
+  {
+    path : "/",
+    element : <AppLevel/>,
+    errorElement :<ErrorRouter/>,
+  children:[
+    {
+    path : "/",
+    element : <Bodycomponent/>
+  },
+  
+  {
+    path : "/about",
+    element : <Suspense fallback ={<h1>Loading....</h1>}><AboutUs/></Suspense>
+  },
+  {
+    path : "contact",
+    element : <ConatctUs/>
+  },
+  {
+    path : "/restro/:id",
+    element : <RestroMenu/>
+  },
+   {
+    path : "/grocery",
+    element : <Suspense fallback ={<h1>Loading....</h1>}><Grocery/></Suspense>
+  }
+]}
+])
+const root=ReactDOM.createRoot(document.getElementById("root"));
+
+    root.render(<RouterProvider router={appRouter} />);
 
 
 // const jsxHeading=<h1 className="head">Hello world from jsx </h1>
@@ -51,8 +91,7 @@ const AppLevel=()=>{
 //    [ React.createElement("h1",{id : "heading"},"i amin h1 tag"),
 //     React.createElement("h2",{id : "heading1"},"i amin h2 tag world")]
 // ));
-   const root=ReactDOM.createRoot(document.getElementById("root"));
-    root.render(<AppLevel/>);
+   
 
     // const he=  document.createElement("h1");
     // he.innerHTML="hello world from java script !";
