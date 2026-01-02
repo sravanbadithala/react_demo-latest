@@ -47,17 +47,12 @@ console.log(listOfCards);
     return <ShimmerUi />;
   }
   return (
-    <div className="body">
-      <div className="serachBar">
-        <button className="filter-btn" onClick={filterWithRating}>
-          Top restro
-        </button>
-
-        <button className="quick-btn" onClick={filerWithDelivery}>
-          quickDeliver
-        </button>
-        <div className="search-comp">
+    <div className="flex flex-col" >
+      <div className="flex flex-col">
+       
+        <div className="search-comp flex m-4 gap-4">
           <input
+          className="border border-solid"
             type="text"
             value={searchText}
             onChange={(e) => {
@@ -65,6 +60,7 @@ console.log(listOfCards);
             }}
           ></input>
           <button
+          className="px-8 py-1  bg-blue-400 rounded-sm"
             onClick={() => {
               const listSerchcards = listOfCards.filter((card) =>
                 card.info.name.toLowerCase().includes(searchText.toLowerCase())
@@ -79,13 +75,22 @@ console.log(listOfCards);
             search
           </button>
         </div>
+         <div className="buttons flex gap-8 m-4">
+        <button className="px-4 py-2 bg-blue-500 text-white rounded" onClick={filterWithRating}>
+          Top restro
+        </button>
+
+        <button className="px-4 py-2  bg-blue-500 text-white rounded" onClick={filerWithDelivery}>
+          quickDeliver
+        </button>
+        </div>
       </div>
-      <div className="restro-containers">
-        <div className="resto-cards">
+      <div className="grid grid-cols-4 gap-6 w-full px-6">
+      
           {listOffilter.map((resCardss) => (
            <Link key={resCardss.info.id}  to={"restro/"+resCardss.info.id}> <RestroCards key={resCardss.info.id} restroName={resCardss} /></Link>
           ))}
-        </div>
+       
       </div>
     </div>
   );

@@ -13,7 +13,7 @@ const Header = () => {
     dotStatus= <span className="red-dot"></span>;
 statusMessage="offline";
   }else{
-      dotStatus= <span className="green-dot"></span>;
+      dotStatus= <span className="inline-block w-2 h-2 bg-green-500 rounded-full"></span>;
       statusMessage="online";
   }
 
@@ -21,12 +21,12 @@ statusMessage="offline";
     login === "Login" ? setLogin("Log Out") : setLogin("Login");
   };
   return (
-    <div className="header">
-      <div className="logo-container">
-        <img className="logo" src={LOGO_URL}></img>
+    <div className="flex justify-between bg-yellow-50 shadow mb-2">
+      <div className="w-25">
+        <img  src={LOGO_URL}></img>
       </div>
-      <div className="nav-items">
-        <ul>
+      <div >
+        <ul className="flex p-5 m-5 gap-4" >
           <li>{dotStatus} {statusMessage}</li>
         <li> <Link to="/">Home</Link> </li>
           <li> <Link to="/about">About us</Link> </li>
@@ -34,7 +34,7 @@ statusMessage="offline";
            <li><Link to="/grocery">Grocery </Link></li>
           <li>Cart</li>
           <li>
-            <button className="login-btn" onClick={onClickLoginbtnHamdler}>
+            <button className="px-7 py-2 bg-blue-500 text-white rounded" onClick={onClickLoginbtnHamdler}>
               {login}
             </button>
           </li>

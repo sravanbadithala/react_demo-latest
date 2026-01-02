@@ -5,14 +5,17 @@ const RestroCards = (props) => {
     restroName?.info;
 
   return (
-    <div className="Restocards">
-      <img width="98%" src={CARD_IMG_BASE_URL + cloudinaryImageId}></img>
-      <h3>
+   
+    <div className="p-1 w-96 gap-3 h-150 border-0 rounded-lg  bg-fuchsia-50 hover:border hover:border-b-amber-50 cursor-pointer">
+      <img className ="w-96 rounded-lg" src={CARD_IMG_BASE_URL + cloudinaryImageId}></img>
+      <h3 className="font-bold py-3">
         {name} <span>{avgRating}</span>
       </h3>
       <h4>{cuisines.join(",")}</h4>
       <h4>deliveryTime {sla.deliveryTime} min</h4>
     </div>
+    
+
   );
 };
 export default RestroCards;
